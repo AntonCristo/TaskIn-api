@@ -1,8 +1,8 @@
 import { createServer, Server as HttpServer } from "http";
 import express from "express";
 import { config } from "dotenv";
-import { Server } from "./api/server";
-import { env } from "./config";
+import { Server } from "./src/api/server";
+import { env } from "./src/config";
 
 config();
 
