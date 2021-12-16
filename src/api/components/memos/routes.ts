@@ -11,7 +11,6 @@ export class MemosRoutes implements IComponentRoutes<MemosController> {
   router: Router = Router();
 
   initRoutes(): void {
-    this.router.get("/", this.controller.getAllMemos);
-    this.router.post("/mock", this.controller.postMockMemo);
+    this.router.get("/mock", this.controller.getMock);
   }
 }
