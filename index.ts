@@ -1,12 +1,10 @@
 import { createServer, Server as HttpServer } from "http";
 import { config } from "dotenv";
 import express from "express";
-import mongoose from "mongoose";
 import { Server } from "./src/api/server";
 import { env } from "./src/config";
 
 config();
-const mongoDbconnectionString = `mongodb+srv://free-user:${process.env.MONGO_PASSWORD}@freecluster.tomz5.mongodb.net/taskinDB?retryWrites=true&w=majority`;
 
 // (async function main() {
 //   try {
@@ -19,16 +17,6 @@ const mongoDbconnectionString = `mongodb+srv://free-user:${process.env.MONGO_PAS
 const app: express.Application = new Server().app;
 const server: HttpServer = createServer(app);
 
-// mongoose
-//   .connect(mongoDbconnectionString)
-//   .then(() => {
-//     console.log("mongoDB connected");
-//   })
-//   .then(() => {
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
 server.listen(env.NODE_PORT);
 
 server.on("listening", () => {
