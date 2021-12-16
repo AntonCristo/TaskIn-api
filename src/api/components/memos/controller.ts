@@ -1,6 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { Memo } from "./model";
-import { MemoDBModel } from "./mongoose";
+import { Memo as MemoType } from "../server-types";
+import { getDatabase, ref, set } from "firebase/database";
+import { firebaseApp } from "../../db";
+
 export class MemosController {
   public getAllMemos = async (
     req: Request,
@@ -8,7 +11,7 @@ export class MemosController {
     next: NextFunction
   ) => {
     try {
-      res.send("get all memos handler");
+      res.send("getAllMemos handler");
     } catch (err) {
       return next(err);
     }
@@ -20,11 +23,11 @@ export class MemosController {
     next: NextFunction
   ) => {
     try {
-      const mock = Memo.getMemoMock();
-      const memo = new MemoDBModel(mock);
-      await memo.save();
-      console.log("saved");
-      res.send({ data: mock });
+      const mock: MemoType = Memo.getMemoMock();
+      console.log("postMockMemo");
+      const db = getDatabase(firebaseApp);
+      set(ref(db, "memos/" + mock.uuid), mock);
+      res.send(mock);
     } catch (err) {
       return next(err);
     }

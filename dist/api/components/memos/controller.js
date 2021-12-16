@@ -11,12 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MemosController = void 0;
 const model_1 = require("./model");
-const mongoose_1 = require("./mongoose");
+const database_1 = require("firebase/database");
+const db_1 = require("../../db");
 class MemosController {
     constructor() {
         this.getAllMemos = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
-                res.send("get all memos handler");
+                res.send("getAllMemos handler");
             }
             catch (err) {
                 return next(err);
@@ -25,10 +26,10 @@ class MemosController {
         this.postMockMemo = (req, res, next) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const mock = model_1.Memo.getMemoMock();
-                const memo = new mongoose_1.MemoDBModel(mock);
-                yield memo.save();
-                console.log("saved");
-                res.send({ data: mock });
+                console.log("postMockMemo");
+                const db = (0, database_1.getDatabase)(db_1.firebaseApp);
+                (0, database_1.set)((0, database_1.ref)(db, "memos/" + mock.uuid), mock);
+                res.send(mock);
             }
             catch (err) {
                 return next(err);
