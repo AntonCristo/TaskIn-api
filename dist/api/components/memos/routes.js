@@ -10,7 +10,8 @@ class MemosRoutes {
         this.initRoutes();
     }
     initRoutes() {
-        this.router.get("/mock", this.controller.getMock);
+        this.router.get("/", this.controller.getAllMemos);
+        this.router.post("/mock", this.controller.postMockMemo);
     }
 }
 exports.MemosRoutes = MemosRoutes;
