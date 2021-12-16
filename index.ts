@@ -19,17 +19,17 @@ const mongoDbconnectionString = `mongodb+srv://free-user:${process.env.MONGO_PAS
 const app: express.Application = new Server().app;
 const server: HttpServer = createServer(app);
 
-mongoose
-  .connect(mongoDbconnectionString)
-  .then(() => {
-    console.log("mongoDB connected");
-  })
-  .then(() => {
-    server.listen(env.NODE_PORT);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// mongoose
+//   .connect(mongoDbconnectionString)
+//   .then(() => {
+//     console.log("mongoDB connected");
+//   })
+//   .then(() => {
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+server.listen(env.NODE_PORT);
 
 server.on("listening", () => {
   console.log(
