@@ -1,7 +1,13 @@
 import { Request, Response, Router } from "express";
 import { registerApiRoutes } from "./components";
-import { registerMiddleware, registerErrorHandler } from "./middleware";
+import { registerMiddleware } from "./middleware";
 
+/**
+ * Init Express REST routes
+ *
+ * @param {Router} router
+ * @returns {void}
+ */
 export const initRestRoutes = (router: Router): void => {
   const prefix: string = "/api";
 
@@ -9,5 +15,5 @@ export const initRestRoutes = (router: Router): void => {
 
   registerMiddleware(router);
   registerApiRoutes(router, prefix);
-  registerErrorHandler(router);
+  // registerErrorHandler(router);
 };
